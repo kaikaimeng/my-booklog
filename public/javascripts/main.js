@@ -1,30 +1,19 @@
-(function($){
+(function($) {
+	$.ajax({
+		dataType: 'json',
+		url: 'http://booklog.io/1/post',
+	    success: function(response) {
+			var content = $('#content');
+			var posts = response.posts;		// array
+			var html = '';
 
- 	var response={};
+			posts.forEach(function (post) {
+				html += '<div class="alert alert-success">';
+				html += post.subject;
+				html += '</div>' 
+			});
 
-    var start = function(){
-    	var content=$('#content');
-    	var posts = response.posts;
-    	var html='';
-
-    	posts.foreach(function(post){
-    		html += '<h2>';
-    		html += post.subject;
-    		html += '</h2>'
-    	});
-    	content.html(html);
-    };
-
-    $.ajax({ 
-    	datatype: 'jsonp',
-    	crossDomain: true,
-     	url:'http://booklog.io/1/post',
-   		success: function(response){
-  			response=data;
-  			start();
-   		}
-    });
- 
-
-})($);
-
+			content.html(html);
+	    }
+	});
+}) ($);
